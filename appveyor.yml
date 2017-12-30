@@ -36,7 +36,7 @@ build_script:
 
 after_build:
   - cd C:\aseprite\build\bin
-  - 7z a %APPVEYOR_BUILD_FOLDER%\aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip aseprite.exe
+  - 7z a %APPVEYOR_BUILD_FOLDER%\aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip *
 
 artifacts:
   - path: aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip
