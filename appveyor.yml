@@ -19,7 +19,7 @@ install:
   - set PATH=C:\deps\depot_tools;%PATH%
   # (The gclient command might print an error like Error: client not configured; see 'gclient config'. Just ignore it.)
   # https://github.com/aseprite/aseprite/blob/master/INSTALL.md#skia-on-windows
-  - gclient sync && exit 0
+  - gclient sync & exit 0
   - cd C:\deps
   - git clone -b %SKIA_VERSION% --single-branch https://github.com/aseprite/skia.git C:\deps\skia
   - cd C:\deps\skia
