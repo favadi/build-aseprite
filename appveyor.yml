@@ -28,7 +28,7 @@ install:
   - gn gen out/Release --args="is_official_build=true skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false target_cpu=""x86"" msvc=2017"
   - ninja -C out/Release
   - mkdir -p C:\deps\openssl
-  - curl -fsSL https://indy.fulgan.com/SSL/openssl-%OPENSSL_VERSION%-i386-win32.zip -o C:\deps\openssl-%OPENSSL_VERSION%-i386-win32.zip
+  - curl -fsSL https://indy.fulgan.com/SSL/openssl-%OPENSSL_VERSION%-i386-win32.zip -o C:\deps\openssl\openssl-%OPENSSL_VERSION%-i386-win32.zip
   - cd C:\deps\openssl
   - 7z x openssl-%OPENSSL_VERSION%-i386-win32.zip
   - rm openssl-%OPENSSL_VERSION%-i386-win32.zip
