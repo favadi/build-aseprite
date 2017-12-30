@@ -33,8 +33,6 @@ build_script:
   - cd C:\aseprite\build
   - cmake -DUSE_ALLEG4_BACKEND=OFF -DUSE_SKIA_BACKEND=ON -DSKIA_DIR=C:\deps\skia -G Ninja ..
   - ninja aseprite
-  - cd C:\aseprite\build
-  - ninja aseprite
 
 after_build:
   - cd C:\aseprite\build\bin
