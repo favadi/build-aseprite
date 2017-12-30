@@ -9,7 +9,7 @@ environment:
   SKIA_VERSION: aseprite-m62
 
 install:
-  - git clone -b %ASEPRITE_VERSION% --single-branch https://github.com/aseprite/aseprite.git C:\aseprite
+  - git clone -b %ASEPRITE_VERSION% --single-branch --recursive https://github.com/aseprite/aseprite.git C:\aseprite
   - mkdir -p C:\deps\depot_tools
   - curl -fsSL https://storage.googleapis.com/chrome-infra/depot_tools.zip -o C:\deps\depot_tools\depot_tools.zip
   - cd C:\deps\depot_tools
@@ -29,7 +29,6 @@ install:
 
 build_script:
   - cd C:\aseprite
-  - git submodule update --init --recursive
   - mkdir build
   - cd C:\aseprite\build
   - cmake -DUSE_ALLEG4_BACKEND=OFF -DUSE_SKIA_BACKEND=ON -DSKIA_DIR=C:\deps\skia -G Ninja ..
