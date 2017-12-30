@@ -1,5 +1,7 @@
 version: 1.0.0.{build}
 
+image: Visual Studio 2017
+
 platform: x64
 
 environment:
@@ -12,6 +14,7 @@ install:
   - cd C:\deps\depot_tools
   - 7z x depot_tools.zip
   - rm depot_tools.zip
+  - ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools"
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
   - set PATH=C:\deps\depot_tools;%PATH%
   - gclient sync
