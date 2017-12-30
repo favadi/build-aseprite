@@ -27,4 +27,18 @@ install:
   - gn gen out/Release --args="is_official_build=true skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false target_cpu=""x86"" msvc=2017"
   - ninja -C out/Release
 
-build: off
+build:
+  - cd C:\aseprite
+  - mkdir build
+  - cd C:\aseprite\build
+  - cmake -DUSE_ALLEG4_BACKEND=OFF -DUSE_SKIA_BACKEND=ON -DSKIA_DIR=C:\deps\skia -G Ninja ..
+  - ninja aseprite
+  - cd C:\aseprite\build
+  - ninja aseprite
+
+after_build:
+  - 7z a aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip C:\aseprite\build\bin\aseprite.exe
+
+artifacts:
+  - path: aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip
+    name: aseprite
