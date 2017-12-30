@@ -1,0 +1,13 @@
+version: 1.0.0.{build}
+
+platform: x64
+
+environment:
+  ASEPRITE_VERSION: v1.2.6
+
+install:
+  - git clone https://github.com/aseprite/aseprite.git C:\aseprite
+  - cd C:\aseprite
+  - git checkout %ASEPRITE_VERSION%
+
+build: off
