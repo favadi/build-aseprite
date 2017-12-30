@@ -29,6 +29,7 @@ install:
 
 build_script:
   - cd C:\aseprite
+  - git submodule update --init --recursive
   - mkdir build
   - cd C:\aseprite\build
   - cmake -DUSE_ALLEG4_BACKEND=OFF -DUSE_SKIA_BACKEND=ON -DSKIA_DIR=C:\deps\skia -G Ninja ..
