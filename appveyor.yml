@@ -6,6 +6,7 @@ platform: x64
 
 environment:
   ASEPRITE_VERSION: v1.2.6
+  SKIA_VERSION: aseprite-m62
 
 install:
   - git clone -b %ASEPRITE_VERSION% --single-branch https://github.com/aseprite/aseprite.git C:\aseprite
@@ -14,9 +15,14 @@ install:
   - cd C:\deps\depot_tools
   - 7z x depot_tools.zip
   - rm depot_tools.zip
-  - ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools"
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
   - set PATH=C:\deps\depot_tools;%PATH%
   - gclient sync
+  - cd C:\deps
+  - git clone -b %SKIA_VERSION% --single-branch https://github.com/aseprite/skia.git C:\deps\skia
+  - cd C:\deps\skia
+  - python tools/git-sync-deps
+  - gn gen out/Release --args="is_official_build=true skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false target_cpu=""x86"" msvc=2017"
+  - ninja -C out/Release
 
 build: off
