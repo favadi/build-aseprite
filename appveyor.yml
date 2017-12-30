@@ -7,6 +7,7 @@ platform: x64
 environment:
   ASEPRITE_VERSION: v1.2.6
   SKIA_VERSION: aseprite-m62
+  OPENSSL_VERSION: 1.0.2n
 
 install:
   - git clone -b %ASEPRITE_VERSION% --single-branch --recursive https://github.com/aseprite/aseprite.git C:\aseprite
@@ -26,6 +27,11 @@ install:
   - python tools/git-sync-deps
   - gn gen out/Release --args="is_official_build=true skia_use_system_expat=false skia_use_system_libjpeg_turbo=false skia_use_system_libpng=false skia_use_system_libwebp=false skia_use_system_zlib=false target_cpu=""x86"" msvc=2017"
   - ninja -C out/Release
+  - mkdir -p C:\deps\openssl
+  - curl -fsSL https://indy.fulgan.com/SSL/openssl-%OPENSSL_VERSION%-i386-win32.zip -o C:\deps\openssl-%OPENSSL_VERSION%-i386-win32.zip
+  - cd C:\deps\openssl
+  - 7z x openssl-%OPENSSL_VERSION%-i386-win32.zip
+  - rm openssl-%OPENSSL_VERSION%-i386-win32.zip
 
 build_script:
   - cd C:\aseprite
@@ -35,9 +41,10 @@ build_script:
   - ninja aseprite
 
 after_build:
+  - cp C:\deps\openssl\libeay32.dll C:\aseprite\build\bin
   - cd C:\aseprite\build\bin
-  - 7z a %APPVEYOR_BUILD_FOLDER%\aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip *
+  - 7z a %APPVEYOR_BUILD_FOLDER%\aseprite_%ASEPRITE_VERSION%_%APPVEYOR_BUILD_NUMBER%.zip *
 
 artifacts:
-  - path: aseprite_%ASEPRITE_VERSION%_%PLATFORM%_%APPVEYOR_BUILD_NUMBER%.zip
+  - path: aseprite_%ASEPRITE_VERSION%_%APPVEYOR_BUILD_NUMBER%.zip
     name: aseprite
